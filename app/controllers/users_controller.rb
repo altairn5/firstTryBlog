@@ -3,8 +3,6 @@ class UsersController < ApplicationController
 
   end
 
-  def show
-  end
 
   def new
   	@user = User.new
@@ -12,6 +10,12 @@ class UsersController < ApplicationController
 
   def create
   	@user = User.create(params.require(:user).permit([:email, :password_digest, :password_confirmation]))
+  	redirect_to user_path(@user)
+  end
 
+  def show
+  	@user =User.find(params[:id])
+  	# binding.pry
+  	
   end
 end

@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  get 'sessions/new'
+  root to: "users#index"
 
-  get 'sessions/create'
+   resources :users
+   resources :articles
 
-  get 'sessions/destroy'
+   #login form 
+   get 'session/new', to: 'sessions#new', as: "login"
+ 
+ #create session
+  post 'session', to: 'sessions#create'
+
+ #signout
+ delete 'sessions', to: 'sessions#destroy'
+
 
   get 'sites/index'
 
@@ -11,10 +20,7 @@ Rails.application.routes.draw do
 
   get 'sites/contact'
 
- root to: "users#index"
-
-   resources :users
-   resources :articles
+ 
 #   Prefix Verb   URI Pattern               Controller#Action
 #      root GET    /                         users#index
 #     users GET    /users(.:format)          users#index
