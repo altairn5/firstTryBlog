@@ -1,25 +1,34 @@
 class SessionsController < ApplicationController
   def new
+  	@user = User.new
   	#it is going by default to the session new.html.erb
   end
 
   def create
-  	user = User.find_by_email(params[:email])
-  	if user.authenticate(params[:password])
 
-  		#login user
-  		session[:user_id] = user.user_id
+	@user = User.confirm(params[:user])
+	
 
-  		redirect_to user_path(user.user_id)
-  	else
-  		redirect_to new_user
-  	end
-  end
+	 if @user
+			login(@user)
 
-  def destroy
-
-  	session[:user_id] = nil
-  	redirect_to "login"
-
-  end
+			redirect_to "/users/#{@user.id}"
+		else
+			redirect_to login
+	end 
 end
+  
+	 
+	
+	
+  def destroy
+  	session[:user_id] = nil
+  	redirect_to login_path
+  end
+
+end
+
+
+
+
+

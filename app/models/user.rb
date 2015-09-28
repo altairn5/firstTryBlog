@@ -1,16 +1,20 @@
 class User < ActiveRecord::Base
 
-	has_secure_password
+	# has_many :
+	# has_many :
 
-	validates :email, uniqueness: true, presence: true
-	validates :password_digest ,presence: true
+	
+
+	# validates :email, uniqueness: true, presence: true
+	# validates :password_digest ,presence: true
 
 	 # has_secure_password does not give us `::confirm`
+	
 
-	 def self.confirm(email_param, password_param)
-	 	user = User.find_by_email(email_param)
-	 	user.authenticate(password_param)
-	 end
+  has_secure_password
 
-
+  def self.confirm(params)
+    user = User.find_by_email(params[:email])
+    # user.try(:authenticate, params[:password])
+  end
 end

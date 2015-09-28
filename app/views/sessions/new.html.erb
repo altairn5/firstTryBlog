@@ -1,8 +1,18 @@
 <h1>Login </h1>
-<p><%=form_tag "/session" do %></p>
-<%=email_field_tag :email, nil, required: true, placeholder: "email"%>
-<%=password_field_tag :password, nil, required: true, placeholder: "Password"%>
-<%=submit_tag "Login"%>
+Sign In
 
-<%end%>
+	<%= form_for @user, url: "/session", method: "post" do |f| %>
+		<div>
+		<%= f.text_field :email, placeholder: "Email" %>
+		</div>
+		<div>
+		<%= f.password_field :password, placeholder: "Password" %>
+		</div>
+		<%= f.submit "Login" %>
+	<% end %>
+
+
+
+
+
 

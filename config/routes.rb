@@ -4,14 +4,17 @@ Rails.application.routes.draw do
    resources :users
    resources :articles
 
+ #SESSIONS
+
    #login form 
-   get 'session/new', to: 'sessions#new', as: "login"
+  get 'session/new' => redirect('/login')
+  get '/login', to: 'sessions#new', as: "login"
  
  #create session
   post 'session', to: 'sessions#create'
 
  #signout
- delete 'sessions', to: 'sessions#destroy'
+ delete 'session', to: 'sessions#destroy', as:"end_session"
 
 
   get 'sites/index'
